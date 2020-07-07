@@ -33,8 +33,8 @@ The API was tested on the Windows 10 Home. To host the Rest API I used Windows S
 The conf.json is added to store information about Endpoint, Uri, Content-Type, AuthToken and AuthTokenFalse.
 
 The Project Structure in Solution Explorer look like this:
-![ProjectStructure](https://user-images.githubusercontent.com/35447819/86813373-c4ea5c00-c088-11ea-8ee7-ada684130dc0.png)
 
+![ProjectStructure](https://user-images.githubusercontent.com/35447819/86813373-c4ea5c00-c088-11ea-8ee7-ada684130dc0.png)
 
 The functionality is covered of the sanity checks app with tests/specs using SpecFlow
 

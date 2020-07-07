@@ -1,0 +1,7 @@
+﻿{
+  "AuthToken": "Y29kZW1vbnN0ZXI6bXk1ZWNyZXQta2V5Mm8ybw==",
+  "Endpoint": "/payment_transactions",
+  "Uri": "http://localhost:3001",
+  "Content-Type": "application/json;charset=UTF-8",
+  "AuthTokenFalse": "2343ZW1vbnN0ZXI6bXk1ZWNyZXQta2V5Mm8ybw=1",
+}

@@ -22,9 +22,12 @@ namespace HttpPaymentGatewayBDD
             if (auth)
                 _restClient.AddDefaultHeader("Authorization", "Basic " + config["AuthToken"]);
             else
-                _restClient.AddDefaultHeader("Authorization", "Basic " + config["AuthTokenFalse"]);
+            {
+                _restClient.AddDefaultHeader("Authorization", "Basic " + Helper.GenerateFalseToken());
+            }
         }
 
+      
 
         public IRestResponse SendTransaction(PaymentDetails _transaction)
         {
@@ -45,6 +48,7 @@ namespace HttpPaymentGatewayBDD
 
         public void AssertStatusCode(int code)
         {
+            var st = (int)_response.StatusCode;
             Assert.IsTrue((int)_response.StatusCode == code);
         }
 

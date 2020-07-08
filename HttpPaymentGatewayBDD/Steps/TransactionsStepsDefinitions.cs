@@ -6,15 +6,15 @@ namespace HttpPaymentGatewayBDD
     [Binding]
     public class TransactionsStepsDefinitions
     {
-        Tests _test;
+        TestService _test;
 
         [Given(@"I am (.*)authorized")]
         public void GivenIAmAuthorized(string not)
         {
-            if (not.Equals("not "))
-                _test = new Tests(false);
+            if (not.Contains("not"))
+                _test = new TestService(false);
             else
-                _test = new Tests(true);
+                _test = new TestService(true);
         }
 
 
@@ -32,7 +32,7 @@ namespace HttpPaymentGatewayBDD
         }
 
 
-        [Then(@"I had the status code (.*)")]
+        [Then(@"I have the status code (.*)")]
         public void ThenMyTrnsactionIs(int statusCode)
         {
             _test.AssertStatusCode(statusCode);

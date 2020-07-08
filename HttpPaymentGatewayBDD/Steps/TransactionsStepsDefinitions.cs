@@ -41,10 +41,10 @@ namespace HttpPaymentGatewayBDD
             _test.VoidToVoidTransaction();
         }
 
-        [When(@"I try to void my non-existent payment transaction:")]
-        public void WhenITryToVoidMyNonExistingTransaction(Table requestDetails)
+        [When(@"I try to void my non-existent payment transaction with ref id (.*)")]
+        public void WhenITryToVoidMyNonExistingTransaction(string refId)
         {
-            _test.TransactVoid(requestDetails.CreateInstance<PaymentDetails>());
+            _test.VoidOfNonExistentTransaction(refId);
         }
     }
 }

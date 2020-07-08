@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
-using System.ComponentModel.DataAnnotations;
 
 namespace HttpPaymentGatewayBDD
 {
@@ -40,6 +39,11 @@ namespace HttpPaymentGatewayBDD
             Assert.AreEqual(code, (int)TransactionRequest.Response.StatusCode);
         }
 
+        public void VoidOfNonExistentTransaction(string refId)
+        {
+            TransactVoid(new PaymentDetails() { ReferenceId = refId });
+            VoidTransaction = TransactionResult.FromJson(TransactionRequest.Response.Content);
+        }
 
         public void VoidValidTransaction()
         {

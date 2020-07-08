@@ -29,7 +29,7 @@ namespace HttpPaymentGatewayBDD
 
       
 
-        public IRestResponse SendTransaction(PaymentDetails _transaction)
+        private IRestResponse SendTransaction(PaymentDetails _transaction)
         {
             Request _saleRequest = new Request() { PaymentTransaction = _transaction };
             var request = new RestRequest(config["Query"], Method.POST);
@@ -40,31 +40,41 @@ namespace HttpPaymentGatewayBDD
             return _response;
         }
 
+        public String TransactSale(PaymentDetails _transaction)
+        {
+            _transaction.TransactionType = config["Sale"];
+            return SendTransaction(_transaction).Content;
+        }
+
+        public string TransactVoid(PaymentDetails _transaction)
+        {
+            _transaction.TransactionType = config["Void"];
+            return SendTransaction(_transaction).Content;
+        }
+
         public void ValidTransaction(PaymentDetails _transaction)
         {
-            _validTransaction = TransactionResult.FromJson(SendTransaction(_transaction).Content);
-
+            _validTransaction = TransactionResult.FromJson(TransactSale(_transaction));
         }
+
 
         public void AssertStatusCode(int code)
         {
-            var st = (int)_response.StatusCode;
-            Assert.IsTrue((int)_response.StatusCode == code);
+            Assert.AreEqual(code, (int)_response.StatusCode);
         }
 
 
-        public void VoidTransaction()
+        public void VoidValidTransaction()
         {
-            PaymentDetails _transaction = new PaymentDetails() { ReferenceId = _validTransaction.UniqueId, TransactionType = config["Void"] };
-
-            _voidTransaction = TransactionResult.FromJson(SendTransaction(_transaction).Content);
+            PaymentDetails _transaction = new PaymentDetails() { ReferenceId = _validTransaction.UniqueId };
+            _voidTransaction = TransactionResult.FromJson(TransactVoid(_transaction));
 
         }
 
         public void VoidToVoidTransaction()
         {
-            PaymentDetails _transaction = new PaymentDetails() { ReferenceId = _voidTransaction.UniqueId, TransactionType = config["Void"] };
-            SendTransaction(_transaction);
+            PaymentDetails _transaction = new PaymentDetails() { ReferenceId = _voidTransaction.UniqueId };
+            TransactVoid(_transaction);
         }
 
     }

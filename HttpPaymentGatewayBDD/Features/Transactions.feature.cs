@@ -109,7 +109,6 @@ this.ScenarioInitialize(scenarioInfo);
                             "ExpirationDate",
                             "Amount",
                             "Usage",
-                            "TransactionType",
                             "CardHolder",
                             "Email",
                             "Address"});
@@ -119,7 +118,6 @@ this.ScenarioInitialize(scenarioInfo);
                             "06/2019",
                             "500",
                             "Coffeemaker",
-                            "sale",
                             "Panda Panda",
                             "panda@example.com",
                             "Panda Street, China"});
@@ -169,7 +167,6 @@ this.ScenarioInitialize(scenarioInfo);
                             "ExpirationDate",
                             "Amount",
                             "Usage",
-                            "TransactionType",
                             "CardHolder",
                             "Email",
                             "Address"});
@@ -179,7 +176,6 @@ this.ScenarioInitialize(scenarioInfo);
                             "06/2019",
                             "500",
                             "Coffeemaker",
-                            "sale",
                             "Panda Panda",
                             "panda@example.com",
                             "Panda Street, China"});
@@ -234,12 +230,12 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("4 Void to Void Transaction")]
-        public virtual void _4VoidToVoidTransaction()
+        [NUnit.Framework.DescriptionAttribute("4 Void a Void Transaction")]
+        public virtual void _4VoidAVoidTransaction()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("4 Void to Void Transaction", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("4 Void a Void Transaction", null, tagsOfScenario, argumentsOfScenario);
 #line 24
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -274,12 +270,12 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("5 Void to non-existent payment Transaction")]
-        public virtual void _5VoidToNon_ExistentPaymentTransaction()
+        [NUnit.Framework.DescriptionAttribute("5 Void a non-existent payment Transaction")]
+        public virtual void _5VoidANon_ExistentPaymentTransaction()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5 Void to non-existent payment Transaction", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5 Void a non-existent payment Transaction", null, tagsOfScenario, argumentsOfScenario);
 #line 29
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -304,11 +300,9 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am authorized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                            "CardNumber",
-                            "TransactionType"});
+                            "CardNumber"});
                 table3.AddRow(new string[] {
-                            "2300000000000000",
-                            "void"});
+                            "2300000000000000"});
 #line 31
  testRunner.When("I try to void my non-existent payment transaction:", ((string)(null)), table3, "When ");
 #line hidden

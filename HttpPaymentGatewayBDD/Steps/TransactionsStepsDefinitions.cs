@@ -26,9 +26,9 @@ namespace HttpPaymentGatewayBDD
         }
 
         [When(@"I post my correct payment details:")]
-        public void WhenIPostMyCorrectPaymentDetails(Table requestDetails)
+        public void WhenIPostMyCorrectPaymentDetailsButItsUnauthorized(Table requestDetails)
         {
-            _test.SendTransaction(requestDetails.CreateInstance<PaymentDetails>());
+            _test.TransactSale(requestDetails.CreateInstance<PaymentDetails>());
         }
 
 
@@ -41,7 +41,7 @@ namespace HttpPaymentGatewayBDD
         [When(@"I try to void my previously successfull transaction")]
         public void WhenITryToVoidMyPreviouslySuccessfullTransaction()
         {
-            _test.VoidTransaction();
+            _test.VoidValidTransaction();
         }
 
         [When(@"I try to void my previous void transaction")]
@@ -53,7 +53,7 @@ namespace HttpPaymentGatewayBDD
         [When(@"I try to void my non-existent payment transaction:")]
         public void WhenITryToVoidMyNonExistingTransaction(Table requestDetails)
         {
-            _test.SendTransaction(requestDetails.CreateInstance<PaymentDetails>());
+            _test.TransactVoid(requestDetails.CreateInstance<PaymentDetails>());
         }
     }
 }

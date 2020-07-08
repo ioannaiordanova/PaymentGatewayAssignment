@@ -3,5 +3,6 @@
   "Query": "/payment_transactions",
   "Uri": "http://localhost:3001",
   "Content-Type": "application/json;charset=UTF-8",
-  "Void" : "void"
+  "Void" : "void",
+  "Sale" : "sale"
 }

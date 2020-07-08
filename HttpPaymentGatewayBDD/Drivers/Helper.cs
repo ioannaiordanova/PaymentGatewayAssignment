@@ -4,13 +4,14 @@ namespace HttpPaymentGatewayBDD
 {
     class Helper
     {
+
         public static string GenerateFalseToken()
         {
             var fixture = new Fixture();
-            string _token = fixture.Create<string>();
-            string _addition = fixture.Create<string>().Substring(0, 4);
-            string FalseAuth = _token + _addition;
-            FalseAuth = FalseAuth.Replace("-", "1");
+            string _addition = fixture.Create<string>().Substring(0, 5);
+            string FalseAuth = TestService.config["AuthToken"].Substring(0, 35) + _addition;
+            FalseAuth = FalseAuth.Replace("0", "1");
+           
             return FalseAuth;
         }
 

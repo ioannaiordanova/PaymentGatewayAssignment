@@ -29,12 +29,13 @@ The API was tested on the Windows 10 Home. To host the Rest API I used Windows S
 - SpecFlow.Assist.Dynamic
 - SpecFlow.NUnit
 - SpecFlow.Tools.MsBuild.Generation
+- AutoFixture
 
 The conf.json is added to store information about Endpoint, Uri, Content-Type, AuthToken and AuthTokenFalse.
 
 The Project Structure
 
-![ProjectStructure](https://user-images.githubusercontent.com/35447819/86813373-c4ea5c00-c088-11ea-8ee7-ada684130dc0.png)
+![ProjectStructure](https://user-images.githubusercontent.com/35447819/86965659-8f20a280-c170-11ea-9fa9-f2d9be0f182e.png)
 
 The functionality is covered of the sanity checks app with tests/specs using SpecFlow
 
@@ -57,6 +58,13 @@ expect 422 etc
 
 **Scenario 5 : Void to non-existent payment Transaction** - sends a void transaction pointing to a non-existent payment transaction
 and expect 422 etc
+
+**Classes**
+RestClientBase extends RestClient
+TransactionRequestBase is a class container for both instances of RestRequest and RestClientBase.
+Class ServiceDriver is a link between the RestSharp classes and the Test Steps.
+Class Helper has only one method which prepares a Randon False Token.
+Class Hooks reads Config file into a variable.It is executed before each feature. 
 
 *The scenarios Void to Void Transaction and Successfull Void Transaction are dependable from the execution of the prevoius scenarios respectively:
 Void to Void Transaction => Successfull Void Transaction

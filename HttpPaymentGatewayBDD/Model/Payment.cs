@@ -3,12 +3,12 @@
     using Newtonsoft.Json;
     using System;
 
-    public partial class Request
+    public partial class Payment
     {
         [JsonProperty("payment_transaction")]
         public PaymentDetails PaymentTransaction { get; set; }
 
-        public static Request FromJson(string json) => JsonConvert.DeserializeObject<Request>(json, Converter.Settings);
+        public static Payment FromJson(string json) => JsonConvert.DeserializeObject<Payment>(json, Converter.Settings);
     }
 
     public partial class PaymentDetails

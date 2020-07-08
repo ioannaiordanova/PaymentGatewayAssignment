@@ -6,6 +6,6 @@ namespace HttpPaymentGatewayBDD
     {
         public static string ToJson(this TransactionResult self) => JsonConvert.SerializeObject(self, HttpPaymentGatewayBDD.Converter.Settings);
 
-        public static string ToJson(this Request self) => JsonConvert.SerializeObject(self, Converter.Settings);
+        public static string ToJson(this Payment self) => JsonConvert.SerializeObject(self, Converter.Settings);
     }
 }

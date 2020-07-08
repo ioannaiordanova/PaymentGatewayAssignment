@@ -6,15 +6,12 @@ namespace HttpPaymentGatewayBDD
     [Binding]
     public class TransactionsStepsDefinitions
     {
-        TestService _test;
+        ServiceDriver _test;
 
         [Given(@"I am (.*)authorized")]
         public void GivenIAmAuthorized(string not)
         {
-            if (not.Contains("not"))
-                _test = new TestService(false);
-            else
-                _test = new TestService(true);
+            _test = new ServiceDriver(!not.Contains("not"));
         }
 
 
@@ -22,7 +19,7 @@ namespace HttpPaymentGatewayBDD
         [System.Obsolete]
         public void WhenIEnterMyCardDetailsAndTryToMakeASale(Table requestDetails)
         {
-            _test.ValidTransaction(requestDetails.CreateInstance<PaymentDetails>());
+            _test.SalesTransaction(requestDetails.CreateInstance<PaymentDetails>());
         }
 
         [When(@"I post my correct payment details:")]

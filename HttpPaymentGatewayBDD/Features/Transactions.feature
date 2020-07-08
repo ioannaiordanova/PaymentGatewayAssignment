@@ -10,7 +10,7 @@ Scenario:1 Successfull Sale Transaction
 
 Scenario:2 Unauthorized Sale Transaction
 	Given I am not authorized
-	When I post my correct payment details:
+	When I submit my payment details:
 	| CardNumber       | Cvv | ExpirationDate | Amount | Usage       |  CardHolder  | Email             | Address             |
 	| 4200000000000000 | 123 | 06/2019        | 500    | Coffeemaker |  Panda Panda | panda@example.com | Panda Street, China |
 	Then I have the status code 401

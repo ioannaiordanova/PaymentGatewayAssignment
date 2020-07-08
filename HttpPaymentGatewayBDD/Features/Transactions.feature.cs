@@ -180,7 +180,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "panda@example.com",
                             "Panda Street, China"});
 #line 13
- testRunner.When("I post my correct payment details:", ((string)(null)), table2, "When ");
+ testRunner.When("I submit my payment details:", ((string)(null)), table2, "When ");
 #line hidden
 #line 16
  testRunner.Then("I have the status code 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
+using System.ComponentModel.DataAnnotations;
 
 namespace HttpPaymentGatewayBDD
 {
@@ -29,7 +30,8 @@ namespace HttpPaymentGatewayBDD
         public void SalesTransaction(PaymentDetails _PaymentDetailsModel)
         {
             TransactSale(_PaymentDetailsModel);
-            ValidTransaction = TransactionResult.FromJson(TransactionRequest.Response.Content);
+            if (!TestContext.CurrentContext.Test.MethodName.Contains("Unauthorized"))
+                ValidTransaction = TransactionResult.FromJson(TransactionRequest.Response.Content);
         }
 
 
@@ -43,7 +45,6 @@ namespace HttpPaymentGatewayBDD
         {
             TransactVoid(new PaymentDetails() { ReferenceId = ValidTransaction.UniqueId });
             VoidTransaction = TransactionResult.FromJson(TransactionRequest.Response.Content);
-
         }
 
         public void VoidToVoidTransaction()

@@ -12,19 +12,27 @@ namespace HttpPaymentGatewayBDD
             RestClient = new RestClientBase(auth);
         }
 
-        public void AddBodyParameter(PaymentDetails _body)
+        public TransactionRequestBase AddBodyParameter(PaymentDetails _body)
+        {  
+            RestRequest.AddParameter(ServiceDriver.Config["Content-Type"], new Payment() { PaymentTransaction = _body }.ToJson(), ParameterType.RequestBody);
+            return this;
+        }
+  
+        private TransactionRequestBase SetPostRequest(string _query)
         {
-            Payment _paymentRequest = new Payment() { PaymentTransaction = _body };          
-            RestRequest.AddParameter(ServiceDriver.Config["Content-Type"], _paymentRequest.ToJson(), ParameterType.RequestBody);
+            RestRequest = new RestRequest(_query, Method.POST);
+            return this;
+        }
+
+        private void Post()
+        {
+            Response = RestClient.Post(RestRequest);
         }
 
         public void SendPaymentDetails(string _query,PaymentDetails _paymentDetails)
         {
-            RestRequest = new RestRequest(_query, Method.POST);
-
-            AddBodyParameter(_paymentDetails);
-            
-            Response = RestClient.Post(RestRequest);
+            SetPostRequest(_query).AddBodyParameter(_paymentDetails).Post();   
         }
+
     }
 }

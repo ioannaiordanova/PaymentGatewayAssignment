@@ -22,12 +22,6 @@ namespace HttpPaymentGatewayBDD
             _test.SalesTransaction(requestDetails.CreateInstance<PaymentDetails>());
         }
 
-        [When(@"I post my correct payment details:")]
-        public void WhenIPostMyCorrectPaymentDetailsButItsUnauthorized(Table requestDetails)
-        {
-            _test.TransactSale(requestDetails.CreateInstance<PaymentDetails>());
-        }
-
 
         [Then(@"I have the status code (.*)")]
         public void ThenMyTrnsactionIs(int statusCode)

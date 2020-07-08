@@ -24,6 +24,17 @@ namespace HttpPaymentGatewayBDD
             return this;
         }
 
+        public bool IfIsResponseIsSuccessful
+        {
+            get { return Response.IsSuccessful; }
+           
+        }
+
+        public string getResponseRefId()
+        {
+           return TransactionResult.FromJson(Response.Content).UniqueId;
+        }
+
         private void Post()
         {
             Response = RestClient.Post(RestRequest);

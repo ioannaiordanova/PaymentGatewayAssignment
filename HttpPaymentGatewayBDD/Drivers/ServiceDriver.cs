@@ -5,7 +5,7 @@ namespace HttpPaymentGatewayBDD
 {
     public class ServiceDriver
     {
-        private static TransactionResult ValidTransaction, VoidTransaction;
+        private static string ValidTransactionRef, VoidTransactionRef;
         public static IConfigurationRoot Config;
         TransactionRequestBase TransactionRequest;
 
@@ -13,7 +13,12 @@ namespace HttpPaymentGatewayBDD
         {
             TransactionRequest = new TransactionRequestBase(auth);
         }
-   
+
+        private void SetValidTransactionRef()
+        {
+            ValidTransactionRef = TransactionRequest.getResponseRefId();
+        }
+
         public void TransactSale(PaymentDetails _paymentDetailsModel)
         {
             _paymentDetailsModel.TransactionType = Config["Sale"];
@@ -29,8 +34,7 @@ namespace HttpPaymentGatewayBDD
         public void SalesTransaction(PaymentDetails _PaymentDetailsModel)
         {
             TransactSale(_PaymentDetailsModel);
-            if (!TestContext.CurrentContext.Test.MethodName.Contains("Unauthorized"))
-                ValidTransaction = TransactionResult.FromJson(TransactionRequest.Response.Content);
+            if (TransactionRequest.IfIsResponseIsSuccessful) SetValidTransactionRef();            
         }
 
 
@@ -42,18 +46,17 @@ namespace HttpPaymentGatewayBDD
         public void VoidOfNonExistentTransaction(string refId)
         {
             TransactVoid(new PaymentDetails() { ReferenceId = refId });
-            VoidTransaction = TransactionResult.FromJson(TransactionRequest.Response.Content);
         }
 
         public void VoidValidTransaction()
         {
-            TransactVoid(new PaymentDetails() { ReferenceId = ValidTransaction.UniqueId });
-            VoidTransaction = TransactionResult.FromJson(TransactionRequest.Response.Content);
+            TransactVoid(new PaymentDetails() { ReferenceId = ValidTransactionRef });
+            VoidTransactionRef = TransactionRequest.getResponseRefId();
         }
 
         public void VoidToVoidTransaction()
         {
-            TransactVoid(new PaymentDetails() { ReferenceId = VoidTransaction.UniqueId });
+            TransactVoid(new PaymentDetails() { ReferenceId = VoidTransactionRef });
         }
 
     }

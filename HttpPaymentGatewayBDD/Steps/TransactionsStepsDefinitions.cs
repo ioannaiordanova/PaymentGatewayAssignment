@@ -29,16 +29,10 @@ namespace HttpPaymentGatewayBDD
             _test.AssertStatusCode(statusCode);
         }
 
-        [When(@"I try to void my previously successfull transaction")]
-        public void WhenITryToVoidMyPreviouslySuccessfullTransaction()
+        [When(@"I try to void my previous (.*) transaction")]
+        public void WhenITryToVoidMyPreviousTransaction(string prevoiusTransactionType)
         {
-            _test.VoidValidTransaction();
-        }
-
-        [When(@"I try to void my previous void transaction")]
-        public void WhenITryToVoidMyPreviousVoidTransaction()
-        {
-            _test.VoidToVoidTransaction();
+            _test.VoidPreviousTransaction(prevoiusTransactionType);
         }
 
         [When(@"I try to void my non-existent payment transaction with ref id (.*)")]

@@ -75,10 +75,19 @@ namespace HttpPaymentGatewayBDD.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("1 Successfull Sale Transaction")]
-        public virtual void _1SuccessfullSaleTransaction()
+        [NUnit.Framework.TestCaseAttribute("4200000000000000", "123", "06/2019", "500", "Coffeemaker", "Panda Panda", "panda@example.com", "Panda Street, China", null)]
+        public virtual void _1SuccessfullSaleTransaction(string cardNumber, string cvv, string expirationDate, string amount, string usage, string cardHolder, string email, string address, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("CardNumber", cardNumber);
+            argumentsOfScenario.Add("Cvv", cvv);
+            argumentsOfScenario.Add("Expiration Date", expirationDate);
+            argumentsOfScenario.Add("Amount", amount);
+            argumentsOfScenario.Add("Usage", usage);
+            argumentsOfScenario.Add("Card Holder", cardHolder);
+            argumentsOfScenario.Add("Email", email);
+            argumentsOfScenario.Add("Address", address);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Successfull Sale Transaction", null, tagsOfScenario, argumentsOfScenario);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
@@ -113,14 +122,14 @@ this.ScenarioInitialize(scenarioInfo);
                             "Email",
                             "Address"});
                 table1.AddRow(new string[] {
-                            "4200000000000000",
-                            "123",
-                            "06/2019",
-                            "500",
-                            "Coffeemaker",
-                            "Panda Panda",
-                            "panda@example.com",
-                            "Panda Street, China"});
+                            string.Format("{0}", cardNumber),
+                            string.Format("{0}", cvv),
+                            string.Format("{0}", expirationDate),
+                            string.Format("{0}", amount),
+                            string.Format("{0}", usage),
+                            string.Format("{0}", cardHolder),
+                            string.Format("{0}", email),
+                            "<Adress>"});
 #line 5
  testRunner.When("I submit my payment details:", ((string)(null)), table1, "When ");
 #line hidden
@@ -133,12 +142,21 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("2 Unauthorized Sale Transaction")]
-        public virtual void _2UnauthorizedSaleTransaction()
+        [NUnit.Framework.TestCaseAttribute("4200000000000000", "123", "06/2019", "500", "Coffeemaker", "Panda Panda", "panda@example.com", "Panda Street, China", null)]
+        public virtual void _2UnauthorizedSaleTransaction(string cardNumber, string cvv, string expirationDate, string amount, string usage, string cardHolder, string email, string address, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("CardNumber", cardNumber);
+            argumentsOfScenario.Add("Cvv", cvv);
+            argumentsOfScenario.Add("Expiration Date", expirationDate);
+            argumentsOfScenario.Add("Amount", amount);
+            argumentsOfScenario.Add("Usage", usage);
+            argumentsOfScenario.Add("Card Holder", cardHolder);
+            argumentsOfScenario.Add("Email", email);
+            argumentsOfScenario.Add("Address", address);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2 Unauthorized Sale Transaction", null, tagsOfScenario, argumentsOfScenario);
-#line 10
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -158,7 +176,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 11
+#line 15
  testRunner.Given("I am not authorized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -171,18 +189,18 @@ this.ScenarioInitialize(scenarioInfo);
                             "Email",
                             "Address"});
                 table2.AddRow(new string[] {
-                            "4200000000000000",
-                            "123",
-                            "06/2019",
-                            "500",
-                            "Coffeemaker",
-                            "Panda Panda",
-                            "panda@example.com",
-                            "Panda Street, China"});
-#line 12
+                            string.Format("{0}", cardNumber),
+                            string.Format("{0}", cvv),
+                            string.Format("{0}", expirationDate),
+                            string.Format("{0}", amount),
+                            string.Format("{0}", usage),
+                            string.Format("{0}", cardHolder),
+                            string.Format("{0}", email),
+                            "<Adress>"});
+#line 16
  testRunner.When("I submit my payment details:", ((string)(null)), table2, "When ");
 #line hidden
-#line 15
+#line 19
  testRunner.Then("I have the status code 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -196,7 +214,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3 Successfull Void Transaction", null, tagsOfScenario, argumentsOfScenario);
-#line 17
+#line 25
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -216,13 +234,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 18
+#line 26
  testRunner.Given("I am authorized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 19
- testRunner.When("I try to void my previously successfull transaction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 27
+ testRunner.When("I try to void my previous sale transaction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 20
+#line 28
  testRunner.Then("I have the status code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -236,7 +254,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("4 Void a Void Transaction", null, tagsOfScenario, argumentsOfScenario);
-#line 22
+#line 30
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -256,13 +274,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 23
+#line 31
  testRunner.Given("I am authorized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 24
+#line 32
  testRunner.When("I try to void my previous void transaction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 25
+#line 33
  testRunner.Then("I have the status code 422", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -276,7 +294,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5 Void a non-existent payment Transaction", null, tagsOfScenario, argumentsOfScenario);
-#line 27
+#line 35
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -296,14 +314,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 28
+#line 36
  testRunner.Given("I am authorized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 29
+#line 37
  testRunner.When("I try to void my non-existent payment transaction with ref id 2f256d59ce347245970" +
                         "4dc43040f0786", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 30
+#line 38
  testRunner.Then("I have the status code 422", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

@@ -9,7 +9,7 @@ namespace HttpPaymentGatewayBDD
         [BeforeFeature]
         public static void BeforeFeature()
         {
-            ServiceDriver.Config = new ConfigurationBuilder().AddJsonFile("conf.json").Build();
+            RestClientBase.Config = new ConfigurationBuilder().AddJsonFile("conf.json").Build();
         }
     }
 }

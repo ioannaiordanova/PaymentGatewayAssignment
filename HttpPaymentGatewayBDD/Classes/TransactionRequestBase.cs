@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Microsoft.Extensions.Configuration;
+using RestSharp;
 
 namespace HttpPaymentGatewayBDD
 {
@@ -7,6 +8,8 @@ namespace HttpPaymentGatewayBDD
         private RestClientBase RestClient;
         public IRestResponse Response { get; set; }
         private RestRequest RestRequest;
+        private IConfigurationRoot Config = RestClientBase.Config;
+ 
         public TransactionRequestBase(bool auth) 
         {
             RestClient = new RestClientBase(auth);
@@ -14,7 +17,7 @@ namespace HttpPaymentGatewayBDD
 
         public TransactionRequestBase AddBodyParameter(PaymentDetails _body)
         {  
-            RestRequest.AddParameter(ServiceDriver.Config["Content-Type"], new Payment() { PaymentTransaction = _body }.ToJson(), ParameterType.RequestBody);
+            RestRequest.AddParameter(Config["Content-Type"], new Payment() { PaymentTransaction = _body }.ToJson(), ParameterType.RequestBody);
             return this;
         }
   
@@ -40,9 +43,21 @@ namespace HttpPaymentGatewayBDD
             Response = RestClient.Post(RestRequest);
         }
 
-        public void SendPaymentDetails(string _query,PaymentDetails _paymentDetails)
+        public void SendPaymentDetails(PaymentDetails _paymentDetails)
         {
-            SetPostRequest(_query).AddBodyParameter(_paymentDetails).Post();   
+            SetPostRequest(Config["Query"]).AddBodyParameter(_paymentDetails).Post();   
+        }
+
+        public void TransactSale(PaymentDetails _paymentDetailsModel)
+        {
+            _paymentDetailsModel.TransactionType = Config["Sale"];
+            SendPaymentDetails(_paymentDetailsModel);
+        }
+
+        public void TransactVoid(PaymentDetails _paymentDetailsModel)
+        {
+            _paymentDetailsModel.TransactionType = Config["Void"];
+            SendPaymentDetails(_paymentDetailsModel);
         }
 
     }

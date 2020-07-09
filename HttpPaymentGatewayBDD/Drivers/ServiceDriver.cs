@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using TechTalk.SpecFlow.Configuration;
 
 namespace HttpPaymentGatewayBDD
 {
     public class ServiceDriver
     {
-        private static string ValidTransactionRef, VoidTransactionRef;
-        public static IConfigurationRoot Config;
+        private static string VoidTransactionRef, ValidTransactionRef;
         TransactionRequestBase TransactionRequest;
 
         public ServiceDriver(bool auth)
@@ -19,21 +18,15 @@ namespace HttpPaymentGatewayBDD
             ValidTransactionRef = TransactionRequest.getResponseRefId();
         }
 
-        public void TransactSale(PaymentDetails _paymentDetailsModel)
+        private void SetVoidTransactionRef()
         {
-            _paymentDetailsModel.TransactionType = Config["Sale"];
-            TransactionRequest.SendPaymentDetails(Config["Query"],_paymentDetailsModel);
+            VoidTransactionRef = TransactionRequest.getResponseRefId();
         }
 
-        public void TransactVoid(PaymentDetails _paymentDetailsModel)
-        {
-            _paymentDetailsModel.TransactionType = Config["Void"];
-            TransactionRequest.SendPaymentDetails(Config["Query"],_paymentDetailsModel);
-        }
 
         public void SalesTransaction(PaymentDetails _PaymentDetailsModel)
         {
-            TransactSale(_PaymentDetailsModel);
+            TransactionRequest.TransactSale(_PaymentDetailsModel);
             if (TransactionRequest.IfIsResponseIsSuccessful) SetValidTransactionRef();            
         }
 
@@ -45,18 +38,18 @@ namespace HttpPaymentGatewayBDD
 
         public void VoidOfNonExistentTransaction(string refId)
         {
-            TransactVoid(new PaymentDetails() { ReferenceId = refId });
+            TransactionRequest.TransactVoid(new PaymentDetails() { ReferenceId = refId });
         }
 
-        public void VoidValidTransaction()
+        public PaymentDetails GetPaymentDetailsBy(string previousTransactionType)
         {
-            TransactVoid(new PaymentDetails() { ReferenceId = ValidTransactionRef });
-            VoidTransactionRef = TransactionRequest.getResponseRefId();
+            return previousTransactionType.IsVoid() ? new PaymentDetails() { ReferenceId = VoidTransactionRef } : new PaymentDetails() { ReferenceId = ValidTransactionRef };
         }
 
-        public void VoidToVoidTransaction()
+        public void VoidPreviousTransaction(string previousTransactionType)
         {
-            TransactVoid(new PaymentDetails() { ReferenceId = VoidTransactionRef });
+            TransactionRequest.TransactVoid(GetPaymentDetailsBy(previousTransactionType));
+            if (TransactionRequest.IfIsResponseIsSuccessful) SetVoidTransactionRef();
         }
 
     }

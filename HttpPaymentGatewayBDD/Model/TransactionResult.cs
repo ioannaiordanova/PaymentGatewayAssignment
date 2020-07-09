@@ -3,7 +3,7 @@
     using Newtonsoft.Json;
     using System;
 
-    public partial class TransactionResult
+    public class TransactionResult
     {
         [JsonProperty("unique_id")]
         public string UniqueId { get; set; }
@@ -23,7 +23,7 @@
         [JsonProperty("message")]
         public string Message { get; set; }
 
-        public static TransactionResult FromJson(string json) => JsonConvert.DeserializeObject<TransactionResult>(json, HttpPaymentGatewayBDD.Converter.Settings);
+        public static TransactionResult FromJson(string json) => JsonConvert.DeserializeObject<TransactionResult>(json, Converter.Settings);
     }
 
 }

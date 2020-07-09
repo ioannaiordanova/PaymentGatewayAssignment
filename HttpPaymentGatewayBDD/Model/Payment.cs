@@ -1,17 +1,15 @@
 ﻿namespace HttpPaymentGatewayBDD
 {
     using Newtonsoft.Json;
-    using System;
 
-    public partial class Payment
+    public class Payment
     {
         [JsonProperty("payment_transaction")]
         public PaymentDetails PaymentTransaction { get; set; }
 
-        public static Payment FromJson(string json) => JsonConvert.DeserializeObject<Payment>(json, Converter.Settings);
-    }
+     }
 
-    public partial class PaymentDetails
+    public class PaymentDetails
     {
         [JsonProperty("reference_id")]
         public string ReferenceId { get; set; }

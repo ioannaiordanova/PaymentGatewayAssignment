@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.Diagnostics;
+using System.IO;
 using TechTalk.SpecFlow;
 
 namespace HttpPaymentGatewayBDD
@@ -9,7 +12,11 @@ namespace HttpPaymentGatewayBDD
         [BeforeFeature]
         public static void BeforeFeature()
         {
-            RestClientBase.Config = new ConfigurationBuilder().AddJsonFile("conf.json").Build();
+            string ConfigFile = "conf.json";
+            if (File.Exists(ConfigFile)) 
+                RestClientBase.Config = new ConfigurationBuilder().AddJsonFile(ConfigFile).Build();
+            else
+                Environment.Exit(2);
         }
     }
 }

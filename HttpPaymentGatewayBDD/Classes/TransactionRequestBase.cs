@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace HttpPaymentGatewayBDD
 {
-    class TransactionRequestBase
+    public class TransactionRequestBase
     {
         private RestClientBase RestClient;
         public IRestResponse Response { get; set; }
@@ -15,7 +15,7 @@ namespace HttpPaymentGatewayBDD
             RestClient = new RestClientBase(auth);
         }
 
-        public TransactionRequestBase AddBodyParameter(PaymentDetails _body)
+        private TransactionRequestBase AddBodyParameter(PaymentDetails _body)
         {  
             RestRequest.AddParameter(Config["Content-Type"], new Payment() { PaymentTransaction = _body }.ToJson(), ParameterType.RequestBody);
             return this;

@@ -1,4 +1,5 @@
-﻿using TechTalk.SpecFlow;
+﻿using NUnit.Framework;
+using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
 namespace HttpPaymentGatewayBDD
@@ -26,7 +27,7 @@ namespace HttpPaymentGatewayBDD
         [Then(@"I have the status code (.*)")]
         public void ThenMyTrnsactionIs(int statusCode)
         {
-            _test.AssertStatusCode(statusCode);
+            Assert.AreEqual(statusCode, (int)_test.TransactionRequest.Response.StatusCode);
         }
 
         [When(@"I try to void my previous (.*) transaction")]

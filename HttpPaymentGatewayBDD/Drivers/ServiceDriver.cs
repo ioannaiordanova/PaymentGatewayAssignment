@@ -6,7 +6,7 @@ namespace HttpPaymentGatewayBDD
     public class ServiceDriver
     {
         private static string VoidTransactionRef, ValidTransactionRef;
-        TransactionRequestBase TransactionRequest;
+        public TransactionRequestBase TransactionRequest;
 
         public ServiceDriver(bool auth)
         {
@@ -28,12 +28,6 @@ namespace HttpPaymentGatewayBDD
         {
             TransactionRequest.TransactSale(_PaymentDetailsModel);
             if (TransactionRequest.IfIsResponseIsSuccessful) SetValidTransactionRef();            
-        }
-
-
-        public void AssertStatusCode(int code)
-        {
-            Assert.AreEqual(code, (int)TransactionRequest.Response.StatusCode);
         }
 
         public void VoidOfNonExistentTransaction(string refId)

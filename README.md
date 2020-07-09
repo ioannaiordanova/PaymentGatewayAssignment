@@ -1,4 +1,3 @@
-# eMerchantPayAssignment
 
 ## The tested Application  
 The tested application is a simple payment gateway implementing a JSON API via the Rails 5 API mode. Usually merchants with online businesses integrate with payment gateways in order to offer electronic payments to their customers. The API allows you to trigger Sale and Void transactions and receive the transaction's status and unique identifier.
